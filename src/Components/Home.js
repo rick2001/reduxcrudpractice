@@ -1,8 +1,9 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { showUser } from '../redux/counter/counterSlice';
+import { showUser, deleteUser } from '../redux/counter/counterSlice';
 import { CustomModal } from './CustomModal';
+
 
 export const Home = () => {
     const dispatch = useDispatch();  // creating object of the useDispatch hook
@@ -23,6 +24,11 @@ export const Home = () => {
         setShowPopUp(true);
         
     }
+
+    const handleDeleteButton=(id)=>{
+        dispatch(deleteUser(id));
+        
+    }
     return (
         <>
         {showPopUp && <CustomModal id={id} showPopUp={showPopUp} setShowPopUp={setShowPopUp}/>}
@@ -32,8 +38,8 @@ export const Home = () => {
                     {
                         users.length > 0 ? (
                             users.map((user, index) => (
-                                <div class="card my-2">
-                                    <div key={user.id} class="card-body">
+                                <div key={user.id} class="card my-2">
+                                    <div class="card-body">
                                         <h5 class="card-title">{user.name}</h5>
                                         <p class="card-text">{user.email}</p>
                                         <p class="card-text">{user.age}</p>
@@ -41,7 +47,7 @@ export const Home = () => {
                                         {/* taking the id of the user */}
                                         <button class="btn btn-primary mx-2" onClick={()=>handleViewButton(user.id)}>View</button>
                                         <button class="btn btn-primary mx-2">Edit</button>
-                                        <button class="btn btn-primary mx-2">Delete</button>
+                                        <button class="btn btn-primary mx-2" onClick={()=>handleDeleteButton(user.id)}>Delete</button>
                                     </div>
                                 </div>
                             ))
