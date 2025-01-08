@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { showUser, deleteUser } from '../redux/counter/counterSlice';
 import { CustomModal } from './CustomModal';
+import { Link } from 'react-router-dom';
 
 
 export const Home = () => {
@@ -46,7 +47,7 @@ export const Home = () => {
                                         <p class="card-text">{user.gender}</p>
                                         {/* taking the id of the user */}
                                         <button class="btn btn-primary mx-2" onClick={()=>handleViewButton(user.id)}>View</button>
-                                        <button class="btn btn-primary mx-2">Edit</button>
+                                        <Link to={`/update/${user.id}`} class="btn btn-primary mx-2">Edit</Link>
                                         <button class="btn btn-primary mx-2" onClick={()=>handleDeleteButton(user.id)}>Delete</button>
                                     </div>
                                 </div>
