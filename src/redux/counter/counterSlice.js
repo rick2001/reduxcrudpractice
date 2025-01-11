@@ -4,7 +4,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 const initialState = {
   users: [],
   loading: false,
-  error: null
+  error: null,
+  searchData: ""
 }
 
 
@@ -78,6 +79,13 @@ export const updateUser = createAsyncThunk('updateUser', async (data, {rejectWit
 export const counterSlice = createSlice({
   name: 'counter',
   initialState,
+  reducers:{
+    // navbar search operation
+    searchDataFromNav:(state, action)=>{
+      console.log("This is reducer",action.payload);
+      state.searchData = action.payload;
+    }
+  },
 
   extraReducers: (builder) => {
     // this is for add user
@@ -155,5 +163,5 @@ export const counterSlice = createSlice({
 })
 
 
-
+export const {searchDataFromNav} = counterSlice.actions
 export default counterSlice.reducer

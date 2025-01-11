@@ -1,8 +1,22 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { searchDataFromNav } from '../redux/counter/counterSlice';
+
 export const Navbar = () => {
     const allUsers = useSelector((state)=>state.counter.users);
+    const [searchData, setSearchData] = useState("");
+    const dispatch = useDispatch();
+
+    const handleSearch = (e)=>{  
+        console.log(e.target.value);
+        setSearchData(e.target.value)
+    }
+
+    useEffect(() => {  // what we are doing basically typing and sending the data at the same time in counter slice, the amount of time search data is hit, useffect will run and send the data to counterSlice reducer searchDataFromNav
+      dispatch(searchDataFromNav(searchData));
+    }, [searchData])
+    
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,7 +36,7 @@ export const Navbar = () => {
                         </li>
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={searchData} onChange={handleSearch}/>
                     </form>
                 </div>
             </nav>
