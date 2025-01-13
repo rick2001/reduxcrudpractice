@@ -10,7 +10,7 @@ const initialState = {
 
 
 // read action
-export const showUser = createAsyncThunk('showUser', async ({ rejectWithValue }) => {
+export const showUser = createAsyncThunk('showUser', async (_,{ rejectWithValue }) => {
   const response = await fetch("https://677c0afb20824100c07baa9a.mockapi.io/crud")
   try {
     const result = await response.json();
