@@ -74,6 +74,10 @@ export const Home = () => {
                                     return ele;
                                 }
                                 else { // logic: if we have search something in searchbar, then compare that object name with the search data, if its matching then simply return that
+                                    // both returns same thing
+                                    // if(ele.name.toLowerCase().includes(searchData.toLowerCase())){
+                                    //     return ele;
+                                    // }
                                     return ele.name.toLowerCase().includes(searchData.toLowerCase());
                                 }
                             })
